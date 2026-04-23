@@ -1,42 +1,90 @@
-import Link from "next/link";
+"use client";
 
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/dashboard", label: "Dashboard" },
-  { href: "/articles", label: "Articles" },
-  { href: "/schedule", label: "Study Plan" },
-  { href: "/quiz", label: "Quiz" },
-  { href: "/flashcards", label: "Flashcards" },
-  { href: "/oral-drill", label: "Oral Drill" },
-  { href: "/notes", label: "Notes" }
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+type NavItem = {
+  href: string;
+  label: string;
+  match?: (pathname: string) => boolean;
+};
+
+const navItems: NavItem[] = [
+  {
+    href: "/dashboard",
+    label: "Dashboard",
+    match: (pathname) => pathname === "/dashboard" || pathname === "/",
+  },
+  {
+    href: "/articles",
+    label: "Articles",
+    match: (pathname) => pathname.startsWith("/articles"),
+  },
+  {
+    href: "/schedule",
+    label: "Study Plan",
+    match: (pathname) => pathname.startsWith("/schedule"),
+  },
+  {
+    href: "/practice",
+    label: "Practice",
+    match: (pathname) =>
+      pathname === "/practice" ||
+      pathname.startsWith("/quiz") ||
+      pathname.startsWith("/flashcards") ||
+      pathname.startsWith("/oral-drill") ||
+      pathname.startsWith("/fill-in-blank"),
+  },
+  {
+    href: "/notes",
+    label: "Notes",
+    match: (pathname) => pathname.startsWith("/notes"),
+  },
 ];
 
 export default function Sidebar() {
-  return (
-    <aside className="w-full self-start rounded-[30px] border border-[#5e625f]/15 bg-[#4f5666] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.10)] md:w-64">
-      <div className="mb-8">
-        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#c7a56a]">
-          Study Workspace
-        </div>
-        <div className="mt-2 text-2xl font-semibold text-[#f7f3ec]">
-          Study Shell
-        </div>
-        <p className="mt-3 text-sm leading-7 text-[#d9d4cb]">
-          Structured review for article-based study and ordination prep.
-        </p>
-      </div>
+  const pathname = usePathname();
 
-      <nav className="space-y-2">
-        {links.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="block rounded-2xl px-4 py-3 text-sm font-medium text-[#f1ede5] transition hover:bg-white/8"
-          >
-            {link.label}
-          </Link>
-        ))}
-      </nav>
+  return (
+    <aside className="hidden w-[196px] shrink-0 lg:block">
+      <div className="sticky top-5 ml-5 mt-5 rounded-2xl border border-[#cfc3b2] bg-[#ddd3c4] px-4 py-5">
+        <div className="mb-6">
+          <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#8b6a3e]">
+            Study Workspace
+          </p>
+
+          <h2 className="mt-1 text-[1.55rem] font-bold leading-tight text-[#16253a]">
+            Study Shell
+          </h2>
+        </div>
+
+        <div className="mb-3">
+          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#7d6a52]">
+            Main
+          </p>
+        </div>
+
+        <nav className="space-y-1.5">
+          {navItems.map((item) => {
+            const isActive = item.match ? item.match(pathname) : pathname === item.href;
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={[
+                  "block rounded-xl px-3 py-2.5 text-[15px] font-semibold leading-5 transition",
+                  isActive
+                    ? "bg-[#16253a] text-[#f7f1e7] shadow-sm"
+                    : "text-[#223248] hover:bg-[#ece2d4] hover:text-[#16253a]",
+                ].join(" ")}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
     </aside>
   );
 }

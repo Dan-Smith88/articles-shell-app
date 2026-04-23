@@ -1,44 +1,52 @@
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import ArticleCard from "@/components/ArticleCard";
-import SectionBlock from "@/components/SectionBlock";
 import { groupedArticles } from "@/data/articles";
 
 export default function ArticlesPage() {
+  const sections = [
+    "Articles of Faith",
+    "Biblical Principles for Living",
+    "Declarations on Particular Issues",
+  ] as const;
+
   return (
-    <main className="min-h-screen px-6 py-8 md:px-10 md:py-10">
-      <div className="mx-auto flex w-full max-w-[1600px] flex-col gap-8 md:flex-row">
+    <main className="min-h-screen bg-[#e9e4db] text-[#1f2a3a]">
+      <div className="mx-auto flex max-w-[1600px]">
         <Sidebar />
 
-        <div className="flex-1 space-y-10">
-          <Header
-            title="Articles"
-            subtitle="Browse the article shell by category. Each card opens a detail page with placeholder tools for summaries, drills, quizzes, flashcards, and notes."
-          />
+        <div className="min-w-0 flex-1 p-6 md:p-10">
+          <div className="mx-auto max-w-6xl">
+            <Header
+              title="Articles"
+              subtitle="Use this as the master library. Pick an article first, then choose a study mode from the article hub."
+            />
 
-          <SectionBlock title="Articles of Faith">
-            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {groupedArticles["Articles of Faith"].map((article) => (
-                <ArticleCard key={article.id} article={article} />
+            <div className="mt-8 space-y-10">
+              {sections.map((section) => (
+                <section
+                  key={section}
+                  className="rounded-[2rem] border border-[#d8cfc1] bg-[#f5efe6] p-6 md:p-8"
+                >
+                  <div className="mb-5">
+                    <h2 className="text-2xl font-semibold text-[#1f2a3a]">
+                      {section}
+                    </h2>
+                    <p className="mt-2 text-sm text-[#5d6570]">
+                      {groupedArticles[section].length} article
+                      {groupedArticles[section].length === 1 ? "" : "s"}
+                    </p>
+                  </div>
+
+                  <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                    {groupedArticles[section].map((article) => (
+                      <ArticleCard key={article.id} article={article} />
+                    ))}
+                  </div>
+                </section>
               ))}
             </div>
-          </SectionBlock>
-
-          <SectionBlock title="Biblical Principles for Living">
-            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {groupedArticles["Biblical Principles for Living"].map((article) => (
-                <ArticleCard key={article.id} article={article} />
-              ))}
-            </div>
-          </SectionBlock>
-
-          <SectionBlock title="Declarations on Particular Issues">
-            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {groupedArticles["Declarations on Particular Issues"].map((article) => (
-                <ArticleCard key={article.id} article={article} />
-              ))}
-            </div>
-          </SectionBlock>
+          </div>
         </div>
       </div>
     </main>
