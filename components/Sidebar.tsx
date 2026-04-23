@@ -12,8 +12,8 @@ const links = [
 
 export default function Sidebar() {
   return (
-    <aside className="w-full rounded-[30px] border border-[#5e625f]/15 bg-[#4b5261] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.12)] md:min-h-[calc(100vh-5rem)] md:w-80">
-      <div className="mb-10">
+    <aside className="w-full self-start rounded-[30px] border border-[#5e625f]/15 bg-[#4f5666] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.10)] md:w-64">
+      <div className="mb-8">
         <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#c7a56a]">
           Study Workspace
         </div>

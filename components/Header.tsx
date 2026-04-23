@@ -5,7 +5,7 @@ type Props = {
 
 export default function Header({ title, subtitle }: Props) {
   return (
-    <div className="mb-8">
+    <div>
       <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8b6a3e]">
         Ordination Study
       </div>
