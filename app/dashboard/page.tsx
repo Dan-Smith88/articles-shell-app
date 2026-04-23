@@ -1,53 +1,242 @@
-import Header from "@/components/Header";
+import Link from "next/link";
 import Sidebar from "@/components/Sidebar";
-import StatCard from "@/components/StatCard";
-import ArticleCard from "@/components/ArticleCard";
-import { articles } from "@/data/articles";
-import { categoryCounts, countByStatus, totalArticles } from "@/lib/utils";
 
-export default function DashboardPage() {
-  const counts = categoryCounts();
-  const recent = articles.slice(0, 6);
+const recentArticles = [
+  { title: "The Holy Scriptures", number: "Article 1", href: "/articles/article-1" },
+  { title: "The Trinity", number: "Article 2", href: "/articles/article-2" },
+  { title: "God the Father", number: "Article 3", href: "/articles/article-3" },
+];
 
+const suggestedPaths = [
+  {
+    title: "Core Doctrine Track",
+    description:
+      "Move through the foundational articles first and build the theological core before branching into practice categories.",
+  },
+  {
+    title: "Salvation Sequence",
+    description:
+      "Group related salvation topics together so review feels connected instead of scattered.",
+  },
+  {
+    title: "Church & Ministry Track",
+    description:
+      "Focus on church life, worship, ordinances, prayer, and ministry-oriented material in one pass.",
+  },
+  {
+    title: "Ethics & Christian Living",
+    description:
+      "Review practical Christian living themes as one study path for applied preparation.",
+  },
+];
+
+export default function HomePage() {
   return (
-    <main className="min-h-screen bg-[#e9e4db] px-6 py-8 md:px-10 md:py-10">
-      <div className="mx-auto flex w-full max-w-[1500px] flex-col gap-8 md:flex-row">
+    <main className="min-h-screen bg-[#e7e1d7] text-[#1f2a3a]">
+      <div className="mx-auto flex max-w-[1500px]">
         <Sidebar />
 
-        <div className="flex-1 space-y-8">
-          <Header
-            title="Dashboard"
-            subtitle="A structured workspace for reviewing progress, tracking categories, and evaluating the study flow."
-          />
-
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            <StatCard title="Total Articles" value={totalArticles()} />
-            <StatCard title="Not Started" value={countByStatus("not_started")} />
-            <StatCard title="In Progress" value={countByStatus("in_progress")} />
-            <StatCard
-              title="Reviewed + Mastered"
-              value={countByStatus("reviewed") + countByStatus("mastered")}
-            />
-          </div>
-
-          <div className="grid gap-5 md:grid-cols-3">
-            <StatCard title="Articles of Faith" value={counts.articlesOfFaith} />
-            <StatCard title="Biblical Principles" value={counts.bpl} />
-            <StatCard title="Declarations" value={counts.declarations} />
-          </div>
-
-          <section className="rounded-[32px] border border-[#cfc5b7] bg-[#f7f3ec] p-6 shadow-[0_10px_24px_rgba(0,0,0,0.06)]">
-            <div className="mb-5 flex items-center justify-between">
-              <h2 className="text-2xl font-semibold text-[#1f2a3a]">Recent Articles</h2>
-              <div className="text-sm text-[#6b7280]">Most recent study shells</div>
+        <div className="min-w-0 flex-1 px-6 py-8 md:px-10 md:py-10">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-8">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#8b6a3e]">
+                Ordination Study
+              </p>
+              <h1 className="mt-2 text-4xl font-bold tracking-tight text-[#16253a] md:text-5xl">
+                Dashboard
+              </h1>
+              <p className="mt-3 max-w-3xl text-lg leading-8 text-[#5a6470]">
+                Study by article, jump into practice modes, and keep the workflow
+                clean without stuffing every feature onto one page.
+              </p>
             </div>
 
-            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {recent.map((article) => (
-                <ArticleCard key={article.id} article={article} />
-              ))}
-            </div>
-          </section>
+            <section className="rounded-[2rem] border border-[#cfc3b2] bg-[#f6f1e8] p-7 shadow-[0_1px_0_rgba(0,0,0,0.03)] md:p-8">
+              <div className="max-w-3xl">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#8b6a3e]">
+                  Start Here
+                </p>
+                <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#16253a] md:text-[2.2rem]">
+                  Pick up where you left off
+                </h2>
+                <p className="mt-4 text-base leading-8 text-[#576170]">
+                  Use the article library as the hub, then launch into quiz,
+                  flashcards, oral drill, or fill-in-the-blank from there. This
+                  keeps the experience focused instead of turning the app into a
+                  clutter parade.
+                </p>
+
+                <div className="mt-7 flex flex-wrap gap-3">
+                  <Link
+                    href="/articles"
+                    className="inline-flex rounded-2xl bg-[#16253a] px-5 py-3 text-sm font-bold text-[#f7f1e7] transition hover:opacity-95"
+                  >
+                    Browse Articles
+                  </Link>
+
+                  <Link
+                    href="/practice"
+                    className="inline-flex rounded-2xl border border-[#cfc3b2] bg-[#efe7db] px-5 py-3 text-sm font-bold text-[#223248] transition hover:bg-[#e8decf]"
+                  >
+                    Open Practice
+                  </Link>
+
+                  <Link
+                    href="/schedule"
+                    className="inline-flex rounded-2xl border border-[#cfc3b2] bg-[#efe7db] px-5 py-3 text-sm font-bold text-[#223248] transition hover:bg-[#e8decf]"
+                  >
+                    Schedule
+                  </Link>
+                </div>
+              </div>
+            </section>
+
+            <section className="mt-6 grid gap-6 md:grid-cols-3">
+              <div className="rounded-[1.75rem] border border-[#cfc3b2] bg-[#f6f1e8] p-6 shadow-[0_1px_0_rgba(0,0,0,0.03)]">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#8b6a3e]">
+                  Progress
+                </p>
+                <h3 className="mt-2 text-2xl font-bold text-[#16253a]">
+                  Current Status
+                </h3>
+
+                <div className="mt-5 space-y-3">
+                  <div className="rounded-xl border border-[#d7cbbb] bg-[#efe7db] p-4">
+                    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#7b6953]">
+                      Total Articles
+                    </p>
+                    <p className="mt-1 text-3xl font-bold text-[#16253a]">52</p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="rounded-xl border border-[#d7cbbb] bg-[#efe7db] p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#7b6953]">
+                        In Progress
+                      </p>
+                      <p className="mt-1 text-2xl font-bold text-[#16253a]">0</p>
+                    </div>
+
+                    <div className="rounded-xl border border-[#d7cbbb] bg-[#efe7db] p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#7b6953]">
+                        Reviewed
+                      </p>
+                      <p className="mt-1 text-2xl font-bold text-[#16253a]">0</p>
+                    </div>
+                  </div>
+
+                  <div className="rounded-xl border border-[#d7cbbb] bg-[#efe7db] p-4">
+                    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#7b6953]">
+                      Mastered
+                    </p>
+                    <p className="mt-1 text-2xl font-bold text-[#16253a]">0</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-[1.75rem] border border-[#cfc3b2] bg-[#f6f1e8] p-6 shadow-[0_1px_0_rgba(0,0,0,0.03)]">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#8b6a3e]">
+                      Recent
+                    </p>
+                    <h3 className="mt-2 text-2xl font-bold text-[#16253a]">
+                      Continue Review
+                    </h3>
+                  </div>
+
+                  <Link
+                    href="/articles"
+                    className="text-sm font-bold text-[#8b6a3e] transition hover:opacity-80"
+                  >
+                    All articles
+                  </Link>
+                </div>
+
+                <div className="mt-5 space-y-3">
+                  {recentArticles.map((article) => (
+                    <Link
+                      key={article.number}
+                      href={article.href}
+                      className="block rounded-xl border border-[#d7cbbb] bg-[#efe7db] p-4 transition hover:border-[#bca98c] hover:bg-[#ece3d6]"
+                    >
+                      <p className="text-base font-bold text-[#16253a]">
+                        {article.title}
+                      </p>
+                      <p className="mt-1 text-sm text-[#667180]">{article.number}</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-[1.75rem] border border-[#cfc3b2] bg-[#f6f1e8] p-6 shadow-[0_1px_0_rgba(0,0,0,0.03)]">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#8b6a3e]">
+                    Practice
+                  </p>
+                  <h3 className="mt-2 text-2xl font-bold text-[#16253a]">
+                    Quick Queue
+                  </h3>
+                </div>
+
+                <div className="mt-5 space-y-3">
+                  <Link
+                    href="/flashcards?count=5"
+                    className="block rounded-xl border border-[#d7cbbb] bg-[#efe7db] px-4 py-4 text-sm font-semibold text-[#223248] transition hover:border-[#bca98c] hover:bg-[#ece3d6]"
+                  >
+                    Review 5 flashcards
+                  </Link>
+
+                  <Link
+                    href="/quiz?count=5"
+                    className="block rounded-xl border border-[#d7cbbb] bg-[#efe7db] px-4 py-4 text-sm font-semibold text-[#223248] transition hover:border-[#bca98c] hover:bg-[#ece3d6]"
+                  >
+                    Answer 5 quiz prompts
+                  </Link>
+
+                  <Link
+                    href="/oral-drill?count=5"
+                    className="block rounded-xl border border-[#d7cbbb] bg-[#efe7db] px-4 py-4 text-sm font-semibold text-[#223248] transition hover:border-[#bca98c] hover:bg-[#ece3d6]"
+                  >
+                    Practice 5 oral prompts
+                  </Link>
+
+                  <Link
+                    href="/fill-in-blank?count=5"
+                    className="block rounded-xl border border-[#d7cbbb] bg-[#efe7db] px-4 py-4 text-sm font-semibold text-[#223248] transition hover:border-[#bca98c] hover:bg-[#ece3d6]"
+                  >
+                    Work 5 fill-in-the-blank items
+                  </Link>
+                </div>
+              </div>
+            </section>
+
+            <section className="mt-6 rounded-[1.9rem] border border-[#cfc3b2] bg-[#f6f1e8] p-6 shadow-[0_1px_0_rgba(0,0,0,0.03)] md:p-8">
+              <div className="mb-6">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#8b6a3e]">
+                  Suggested Paths
+                </p>
+                <h2 className="mt-2 text-2xl font-bold text-[#16253a]">
+                  Ways to Explore
+                </h2>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+                {suggestedPaths.map((path) => (
+                  <div
+                    key={path.title}
+                    className="rounded-2xl border border-[#d7cbbb] bg-[#efe7db] p-5"
+                  >
+                    <p className="text-base font-bold leading-6 text-[#16253a]">
+                      {path.title}
+                    </p>
+                    <p className="mt-3 text-sm leading-7 text-[#5d6570]">
+                      {path.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
         </div>
       </div>
     </main>
