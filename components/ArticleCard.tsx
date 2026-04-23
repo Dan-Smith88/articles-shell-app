@@ -10,13 +10,13 @@ export default function ArticleCard({ article }: Props) {
   return (
     <Link
       href={`/articles/${article.id}`}
-      className="block rounded-3xl border border-white/10 bg-slate-900/75 p-6 shadow-xl transition hover:-translate-y-1 hover:border-blue-400/30 hover:bg-slate-900"
+      className="block rounded-[28px] border border-[#cfc5b7] bg-[#f7f3ec] p-6 shadow-[0_10px_24px_rgba(0,0,0,0.06)] transition hover:-translate-y-0.5 hover:bg-[#fbf8f2]"
     >
       <div className="flex items-start justify-between gap-4">
         <div>
-          <div className="text-sm font-medium text-slate-400">{article.number}</div>
-          <h3 className="mt-2 text-xl font-semibold text-white">{article.title}</h3>
-          <p className="mt-2 text-sm text-slate-400">{article.category}</p>
+          <div className="text-sm font-medium text-[#7a746c]">{article.number}</div>
+          <h3 className="mt-2 text-xl font-semibold text-[#1f2a3a]">{article.title}</h3>
+          <p className="mt-2 text-sm text-[#6b7280]">{article.category}</p>
         </div>
         <StatusBadge status={article.status} />
       </div>
@@ -25,7 +25,7 @@ export default function ArticleCard({ article }: Props) {
         {article.tags.map((tag) => (
           <span
             key={tag}
-            className="rounded-full border border-blue-400/20 bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-200"
+            className="rounded-full border border-[#ddd3c5] bg-[#efe8dc] px-3 py-1 text-xs font-medium text-[#5d6570]"
           >
             {tag}
           </span>

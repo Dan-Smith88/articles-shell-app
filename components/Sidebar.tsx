@@ -12,14 +12,16 @@ const links = [
 
 export default function Sidebar() {
   return (
-    <aside className="w-full rounded-3xl border border-white/10 bg-slate-950/70 p-5 shadow-2xl backdrop-blur md:w-72">
-      <div className="mb-6">
-        <div className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-400">
-          Study Platform
+    <aside className="w-full rounded-[30px] border border-[#5e625f]/15 bg-[#4b5261] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.12)] md:min-h-[calc(100vh-5rem)] md:w-80">
+      <div className="mb-10">
+        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#c7a56a]">
+          Study Workspace
         </div>
-        <div className="mt-2 text-2xl font-bold text-white">Study Shell</div>
-        <p className="mt-2 text-sm leading-6 text-slate-400">
-          Local prototype for article-based study, review, and oral drill prep.
+        <div className="mt-2 text-2xl font-semibold text-[#f7f3ec]">
+          Study Shell
+        </div>
+        <p className="mt-3 text-sm leading-7 text-[#d9d4cb]">
+          Structured review for article-based study and ordination prep.
         </p>
       </div>
 
@@ -28,7 +30,7 @@ export default function Sidebar() {
           <Link
             key={link.href}
             href={link.href}
-            className="block rounded-2xl px-4 py-3 text-sm font-medium text-slate-300 transition hover:bg-blue-500/15 hover:text-white"
+            className="block rounded-2xl px-4 py-3 text-sm font-medium text-[#f1ede5] transition hover:bg-white/8"
           >
             {link.label}
           </Link>

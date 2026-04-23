@@ -13,8 +13,8 @@ export default function QuizPage() {
   );
 
   return (
-    <main className="min-h-screen px-6 py-8 md:px-10 md:py-10">
-      <div className="mx-auto flex w-full max-w-[1600px] flex-col gap-8 md:flex-row">
+    <main className="min-h-screen bg-[#e9e4db] px-6 py-8 md:px-10 md:py-10">
+      <div className="mx-auto flex w-full max-w-[1500px] flex-col gap-8 md:flex-row">
         <Sidebar />
 
         <div className="flex-1 space-y-6">
@@ -26,18 +26,18 @@ export default function QuizPage() {
           <div className="grid gap-6 xl:grid-cols-2">
             {quizItems.map((item, index) => (
               <StudyShellCard key={index} title={`${item.articleNumber} — ${item.articleTitle}`}>
-                <div className="font-semibold text-white">{item.question}</div>
-                <ul className="space-y-1 pt-3">
+                <div className="font-semibold text-[#1f2a3a]">{item.question}</div>
+                <ul className="space-y-1 pt-3 text-[#4b5563]">
                   {item.choices.map((choice, i) => (
                     <li key={i}>
-                      <span className="mr-2 font-medium text-slate-400">
+                      <span className="mr-2 font-medium text-[#8b93a1]">
                         {String.fromCharCode(65 + i)}.
                       </span>
                       {choice}
                     </li>
                   ))}
                 </ul>
-                <div className="pt-3 text-sm text-slate-400">
+                <div className="pt-3 text-sm text-[#7b8390]">
                   Dummy correct answer: {String.fromCharCode(65 + item.answer)}
                 </div>
               </StudyShellCard>

@@ -5,9 +5,9 @@ type Props = {
 
 export default function StudyShellCard({ title, children }: Props) {
   return (
-    <section className="rounded-3xl border border-white/10 bg-slate-900/75 p-6 shadow-xl backdrop-blur">
-      <h2 className="mb-5 text-xl font-semibold text-white">{title}</h2>
-      <div className="space-y-3 text-sm leading-6 text-slate-300">{children}</div>
+    <section className="rounded-[28px] border border-[#cfc5b7] bg-[#f7f3ec] p-6 shadow-[0_10px_24px_rgba(0,0,0,0.06)]">
+      <h2 className="mb-5 text-xl font-semibold text-[#1f2a3a]">{title}</h2>
+      <div className="space-y-3 text-sm leading-7 text-[#4b5563]">{children}</div>
     </section>
   );
 }
