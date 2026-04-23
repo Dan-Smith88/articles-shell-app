@@ -22,7 +22,7 @@ const navItems: NavItem[] = [
   },
   {
     href: "/schedule",
-    label: "Study Plan",
+    label: "Schedule",
     match: (pathname) => pathname.startsWith("/schedule"),
   },
   {

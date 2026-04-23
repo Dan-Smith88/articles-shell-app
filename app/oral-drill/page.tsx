@@ -1,7 +1,8 @@
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
-import StudyShellCard from "@/components/StudyShellCard";
 import StudyFilters from "@/components/StudyFilters";
+import PageTopActions from "@/components/PageTopActions";
+import OralDrillStudyClient from "@/components/OralDrillStudyClient";
 import { articles } from "@/data/articles";
 import { getOralDrillItems } from "@/lib/study-mode";
 
@@ -30,9 +31,10 @@ export default async function OralDrillPage({ searchParams }: Props) {
     <main className="min-h-screen bg-[#e9e4db] text-[#1f2a3a]">
       <div className="mx-auto flex max-w-[1600px]">
         <Sidebar />
-
         <div className="min-w-0 flex-1 p-6 md:p-10">
           <div className="mx-auto max-w-6xl">
+            <PageTopActions />
+
             <Header
               title="Oral Drill"
               subtitle={
@@ -55,29 +57,7 @@ export default async function OralDrillPage({ searchParams }: Props) {
               />
             </div>
 
-            <div className="mt-8 space-y-5">
-              {items.map((item, index) => (
-                <StudyShellCard
-                  key={item.id}
-                  title={`${index + 1}. ${item.articleNumber} · ${item.articleTitle}`}
-                >
-                  <div className="rounded-2xl border border-[#d8cfc1] bg-[#f7f2ea] p-5">
-                    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8b6a3e]">
-                      Prompt
-                    </p>
-                    <p className="mt-2 text-sm leading-7 text-[#1f2a3a]">
-                      {item.prompt}
-                    </p>
-                  </div>
-                </StudyShellCard>
-              ))}
-
-              {items.length === 0 ? (
-                <div className="rounded-3xl border border-dashed border-[#d8cfc1] bg-[#f5efe6] p-6 text-sm text-[#5a6470]">
-                  No oral drill prompts found for that selection.
-                </div>
-              ) : null}
-            </div>
+            <OralDrillStudyClient items={items} />
           </div>
         </div>
       </div>
